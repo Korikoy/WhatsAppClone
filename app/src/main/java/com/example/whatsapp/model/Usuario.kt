@@ -10,9 +10,9 @@ import java.io.Serializable
 
 class Usuario(
     var nome:String = "",
-    var email:String = "",
-    var foto :String? = null,
-    @get: Exclude  var senha:String = "",
+    var email: String = "",
+    var foto:String? = null,
+    @get: Exclude var senha:String = "",
     @get: Exclude var id:String = ""
 ): Serializable{
     fun salvar(){

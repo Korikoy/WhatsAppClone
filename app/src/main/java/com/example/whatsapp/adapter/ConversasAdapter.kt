@@ -1,12 +1,14 @@
 package com.example.whatsapp.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.whatsapp.R
+import com.example.whatsapp.activity.ChatActivity
 import com.example.whatsapp.databinding.AdapterContatosBinding
 import com.example.whatsapp.model.Conversa
 import com.example.whatsapp.model.Usuario
@@ -21,18 +23,18 @@ class ConversasAdapter(
     MyViewHolder(val binding: AdapterContatosBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        /*init {
+        init {
 
             binding.root.setOnClickListener {
                 val position: Int = adapterPosition
-                val usuario: Conversa = contatos.get(position)
+                val conversaSelecionada:Conversa = conversas.get(position)
                 val intent = Intent(context, ChatActivity::class.java)
-                intent.putExtra("chat",usuario)
+                intent.putExtra("chat",conversaSelecionada.usuario)
                 context.startActivity(intent)
 
             }
 
-        }*/
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

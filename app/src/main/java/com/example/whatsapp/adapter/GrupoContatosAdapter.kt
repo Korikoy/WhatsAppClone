@@ -1,58 +1,50 @@
 package com.example.whatsapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.whatsapp.R
-import com.example.whatsapp.activity.ChatActivity
 import com.example.whatsapp.activity.GrupoActivity
 import com.example.whatsapp.databinding.AdapterContatosBinding
-import com.example.whatsapp.model.Conversa
 import com.example.whatsapp.model.Usuario
 
-class ContatosAdapter(
+
+class GrupoContatosAdapter(
     listaContato: ArrayList<Usuario>,
     var context: Context,
-): RecyclerView.Adapter<ContatosAdapter.MyViewHolder>() {
+    private val onItemClickListener: OnItemClickListener
+    ): RecyclerView.Adapter<GrupoContatosAdapter.MyViewHolder>() {
     private val contatos = listaContato
 
+
     inner class
-        MyViewHolder(val binding: AdapterContatosBinding) :
+    MyViewHolder(val binding: AdapterContatosBinding, onItemClickListener: OnItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
-       init {
+        init {
+
             binding.root.setOnClickListener {
-                val position: Int = adapterPosition
-                val usuario: Usuario = contatos.get(position)
-                val cabecalho: Boolean = usuario.email == ""
-
-                if(cabecalho){
-                    val intent = Intent(context, GrupoActivity::class.java)
-                    context.startActivity(intent)
-                }else {
-                    val intent = Intent(context, ChatActivity::class.java)
-                    intent.putExtra("chat", usuario)
-                    context.startActivity(intent)
-
-                }
+                onItemClickListener.onClick(adapterPosition)
             }
+        }
 
-        }
-        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         context = parent.context
         val binding =
             AdapterContatosBinding.inflate(LayoutInflater.from(context), parent, false)
-        return MyViewHolder(binding)
+        return MyViewHolder(binding, onItemClickListener)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
+    override fun onBindViewHolder(holder: GrupoContatosAdapter.MyViewHolder, position: Int) {
         val usuario: Usuario = contatos[position]
         val cabecalho: Boolean = usuario.email == ""
         holder.binding.textNomeContato.text = usuario.nome
@@ -61,9 +53,9 @@ class ContatosAdapter(
             val uri = Uri.parse(usuario.foto)
             Glide.with(context).load(uri).into(holder.binding.imageViewFotoContato)
         }else if (cabecalho)
-            { holder.binding.imageViewFotoContato.setImageResource(R.drawable.icone_grupo)
-                holder.binding.textEmailContato.visibility = View.GONE
-            }else{
+        { holder.binding.imageViewFotoContato.setImageResource(R.drawable.icone_grupo)
+            holder.binding.textEmailContato.visibility = View.GONE
+        }else{
             holder.binding.imageViewFotoContato.setImageResource(R.drawable.padrao)
         }
     }
@@ -74,5 +66,13 @@ class ContatosAdapter(
     override fun getItemId(position: Int): Long {
         return super.getItemId(position)
     }
+    interface OnItemClickListener {
+        fun onClick(position: Int)
+    }
+
+
+
+
+
 }
 

@@ -1,6 +1,7 @@
 package com.example.whatsapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +60,29 @@ fun recycleConversa() {
         conversasRef.removeEventListener(childEventListener)
         lista.clear()
     }
+
+    fun pesquisarConversas(texto: String){
+        val listaConversaBusca: ArrayList<Conversa> = ArrayList()
+        for(conversa:Conversa in lista){
+            val nome = conversa.usuario?.nome?.toLowerCase()
+            val ultMsg = conversa.ultimaMsg?.toLowerCase()
+            if(nome!!.contains(texto) || ultMsg!!.contains(texto)){
+                listaConversaBusca.add(conversa)
+            }
+        }
+        adapter = activity?.let { ConversasAdapter(listaConversaBusca, it) }!!
+        recycleConversa()
+        adapter.notifyDataSetChanged()
+    }
+
+    fun recarregarConversas(){
+        adapter = activity?.let { ConversasAdapter(lista, it) }!!
+        recycleConversa()
+        adapter.notifyDataSetChanged()
+    }
+
+
+
 
     fun recuperarConversas(){
        childEventListener = conversasRef.addChildEventListener(object :ChildEventListener{

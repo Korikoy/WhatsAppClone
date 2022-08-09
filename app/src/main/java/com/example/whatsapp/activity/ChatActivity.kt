@@ -75,7 +75,7 @@ class ChatActivity : AppCompatActivity() {
             }else{
                 binding.circleImageFotoChat.setImageResource(R.drawable.padrao)
             }
-            idUsuarioDest = Base64Custom.codificarBase64(userDest.email)
+            idUsuarioDest = Base64Custom.codificarBase64(userDest.email!!)
         }
         adapter = MensagensAdapter(lista,this)
 

@@ -21,7 +21,7 @@ class ContatosFragment : Fragment() {
     var lista = ArrayList<Usuario>()
     lateinit var adapter: ContatosAdapter
     private var usuarioRef = ConfiguracaoFirebase.getDataRef().child("usuarios")
-    lateinit var usernow: FirebaseUser
+    var usernow: FirebaseUser = UserFirebase.getUsuarioAtual()
     private lateinit var contatoEventListener: ValueEventListener
 
 
@@ -33,7 +33,7 @@ class ContatosFragment : Fragment() {
         val view: View = binding.root
         adapter = activity?.let { ContatosAdapter(lista, it) }!!
         recycleContato()
-        usernow = UserFirebase.getUsuarioAtual()
+
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +59,10 @@ class ContatosFragment : Fragment() {
         binding.recycleViewListaContatos.adapter = adapter
     }
     fun recuperarContatos(){
+        var itemGrupo = Usuario()
+        itemGrupo.nome = "Novo Grupo"
+        itemGrupo.email = ""
+        lista.add(itemGrupo)
         contatoEventListener = usuarioRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
               for (dadosUser in snapshot.children){

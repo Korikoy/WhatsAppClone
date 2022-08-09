@@ -6,6 +6,7 @@
         android:title="@string/pesquisar"
         app:showAsAction="always"
         android:icon="@drawable/ic_pesquisa_branco_24"
+        app:actionViewClass="android.widget.SearchView"
         />
     <item android:id="@+id/menuConfiguraçoes"
         android:title="@string/configuraçoes"
