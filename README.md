@@ -4,7 +4,7 @@ AppClone do WhatsApp para fins de conhecimento e estudo
 
 ## :rescue_worker_helmet: Instruções de uso
 
-Para ter acesso ao aplicativo é necessário criar uma conta. Acesse a tela de Cadastro "Sign up", e digite um email e senha válidos para poder criar sua conta. Esses dados serão processados pelo Firebase que automaticamente criarão uma conta, caso o usuário insira email e senha válidos. Em seguida, o usuário está pronto para usar a interface do aplicativo
+Para ter acesso ao aplicativo é necessário criar uma conta. Acesse a tela de Cadastro "Não tem contra? Clique aqui", e digite um email e senha válidos para poder criar sua conta. Esses dados serão processados pelo Firebase que automaticamente criarão uma conta, caso o usuário insira email e senha válidos. Em seguida, o usuário está pronto para usar a interface do aplicativo
 
 ### Soluções:
 * Validação de informação das contas e prontamente retorno de erro
